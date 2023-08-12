@@ -15,10 +15,10 @@ btnStart.disabled = true;
 const options = {
   enableTime: true,
   time_24hr: true,
-  defaultDate: new Date(),
+  defaultDate: Date.now(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    if (selectedDates[0] < new Date()) {
+  onClose([selectedDates]) {
+    if (selectedDates < Date.now()) {
       Notiflix.Notify.failure('Please choose a date in the future');
       btnStart.disabled = true;
     } else {
@@ -54,7 +54,7 @@ function addLeadingZero(value) {
 
 btnStart.addEventListener('click', () => {
   let timer = setInterval(() => {
-    let countdown = new Date(text.value) - new Date();
+    let countdown = new Date(text.value) - Date.now();
     btnStart.disabled = true;
     if (countdown >= 0) {
       let timeObject = convertMs(countdown);
